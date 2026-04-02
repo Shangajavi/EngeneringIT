@@ -1634,21 +1634,9 @@ PrefabInstance:
       propertyPath: CamClose
       value: 
       objectReference: {fileID: 332750521}
-    - target: {fileID: 3884142130360492010, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
-      propertyPath: jumpForce
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3884142130360492010, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
-      propertyPath: MovementForce
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4333246342858278346, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 9154962909591438272, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
-      propertyPath: m_Mass
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
