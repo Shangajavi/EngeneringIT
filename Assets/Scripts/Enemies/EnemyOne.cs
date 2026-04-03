@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 
@@ -10,11 +11,18 @@ public class EnemyOne : MonoBehaviour, IDamageable
     [SerializeField] private int moveSpeed = 2;
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private Path currentPath;
+    [SerializeField] private AudioClip deathSound;
+    private Collider2D col2D;
+    private SpriteRenderer sRenderer;
+    private AudioSource audioDeath;
     private int currentPoint;
 
     private void Awake()
     {
         currentPath = GameObject.Find("Path").GetComponent<Path>();
+        audioDeath = GetComponent<AudioSource>();
+        col2D = GetComponent<Collider2D>();
+        sRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -35,6 +43,7 @@ public class EnemyOne : MonoBehaviour, IDamageable
             }
             else
             {
+                
                 gameObject.SetActive(false);
             }
         }
@@ -48,7 +57,10 @@ public class EnemyOne : MonoBehaviour, IDamageable
         Debug.Log("Enemigo dañado");
 
         if (health <= 0)
-            Destroy(gameObject);
+        {
+            
+            StartCoroutine(Death());
+        }
     }
     
 
@@ -57,8 +69,18 @@ public class EnemyOne : MonoBehaviour, IDamageable
         var damageable = other.GetComponentInParent<IDamageable>();
         if (damageable != null)
         {
+            audioDeath.PlayOneShot(deathSound);
             damageable.TakeDamage(damage);
         }
+    }
+
+    private IEnumerator Death()
+    {
+       col2D.enabled = false;
+       sRenderer.enabled = false;
+       audioDeath.PlayOneShot(deathSound);
+        yield return new WaitForSeconds(deathSound.length);
+        Destroy(gameObject);
     }
 }
 

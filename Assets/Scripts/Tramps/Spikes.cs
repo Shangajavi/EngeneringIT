@@ -13,6 +13,7 @@ public class Spikes : MonoBehaviour
         var damageable = other.GetComponentInParent<IDamageable>();
         if (damageable != null)
         {
+            
             damageable.TakeDamage(damage);
         }
     }
