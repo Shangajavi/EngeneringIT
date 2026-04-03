@@ -1588,6 +1588,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1696793140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2066026089 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7862226292675250295, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
+  m_PrefabInstance: {fileID: 9194833867612626715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2093409522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,15 +1847,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3855254227993459751, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3855254227993459751, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3855254227993459751, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3855254227993459751, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1869,9 +1874,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 950976490}
     - target: {fileID: 3884142130360492010, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
+      propertyPath: camAway
+      value: 
+      objectReference: {fileID: 950976490}
+    - target: {fileID: 3884142130360492010, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
       propertyPath: CamClose
       value: 
       objectReference: {fileID: 332750521}
+    - target: {fileID: 3884142130360492010, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
+      propertyPath: animMove
+      value: 
+      objectReference: {fileID: 2066026089}
+    - target: {fileID: 3884142130360492010, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
+      propertyPath: camClose
+      value: 
+      objectReference: {fileID: 332750521}
+    - target: {fileID: 3884142130360492010, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
+      propertyPath: movementForce
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4333246342858278346, guid: c6f11298397c8ce408bfeacb2e0214e3, type: 3}
       propertyPath: m_Name
       value: Player
