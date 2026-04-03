@@ -54,7 +54,7 @@ public class EnemyOne : MonoBehaviour, IDamageable
     public void TakeDamage(int amount)
     {
         health -= amount;
-        Debug.Log("Enemigo dañado");
+        
 
         if (health <= 0)
         {

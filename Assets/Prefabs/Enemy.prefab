@@ -160,7 +160,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.2655721}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -170,7 +170,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.46885583}
   m_EdgeRadius: 0
 --- !u!114 &4630502216921511500
 MonoBehaviour:
@@ -189,7 +189,7 @@ MonoBehaviour:
   moveSpeed: 5
   targetPosition: {x: 0, y: 0, z: 0}
   currentPath: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: 8895454d6021c2d42812702d8bdc0d43, type: 3}
+  deathSound: {fileID: 8300000, guid: 66a07294c3d87fd4b966bbb352ce7e9c, type: 3}
 --- !u!82 &2044242796940331693
 AudioSource:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 8895454d6021c2d42812702d8bdc0d43, type: 3}
+  m_Resource: {fileID: 8300000, guid: 66a07294c3d87fd4b966bbb352ce7e9c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
