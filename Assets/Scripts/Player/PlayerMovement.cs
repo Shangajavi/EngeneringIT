@@ -1,25 +1,22 @@
-using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float movementForce;
-    [SerializeField] private float jumpForce;
     [SerializeField] private Animator animMove;
+
     
     [SerializeField] private GameObject camClose;
     [SerializeField] private GameObject camAway;
     
     private SpriteRenderer sRenderer;
-    private Rigidbody2D rb;
     private float jumpinput;
     private float hinput;
     private Vector2 movement;
 
-
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        Application.targetFrameRate = 60;
         sRenderer = GetComponent<SpriteRenderer>();
         camAway.SetActive(false);
         camClose.SetActive(true);
@@ -28,25 +25,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+       
         hinput = Input.GetAxisRaw("Horizontal");
-        jumpinput = Input.GetAxisRaw("Jump");
-        movement = new Vector2(hinput, jumpinput * jumpForce);
+        movement.x = hinput * movementForce * Time.deltaTime;
+        transform.Translate(movement);
         if (Input.GetKeyDown(KeyCode.C))
         {
-            
-            camClose.SetActive(!camClose.activeSelf);
-            camAway.SetActive(!camAway.activeSelf);
-
+            CamSwitch();
         }
-        Animations();
+        MoveAnimations();
     }
 
-    private void FixedUpdate()
-    {
-        rb.AddForce(movement * movementForce, ForceMode2D.Impulse);
-    }
-
-    private void Animations()
+    private void MoveAnimations()
     {
         
         if (hinput != 0 )
@@ -68,4 +58,13 @@ public class PlayerMovement : MonoBehaviour
             
         }
     }
+
+    private void CamSwitch()
+    {
+        camClose.SetActive(!camClose.activeSelf);
+        camAway.SetActive(!camAway.activeSelf);
+    }
+
+
+
 }
