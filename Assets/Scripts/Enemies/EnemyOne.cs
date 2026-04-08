@@ -7,15 +7,17 @@ using UnityEngine;
 public class EnemyOne : MonoBehaviour, IDamageable
 {
     [SerializeField] private int health = 50;
-    [SerializeField] private int damage;
+  
     [SerializeField] private int moveSpeed = 2;
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private Path currentPath;
     [SerializeField] private AudioClip deathSound;
     private Collider2D col2D;
+    [SerializeField] private Collider2D attack;
     private SpriteRenderer sRenderer;
     private AudioSource audioDeath;
     private int currentPoint;
+    private bool isAttacking = true;
 
     private void Awake()
     {
@@ -43,8 +45,10 @@ public class EnemyOne : MonoBehaviour, IDamageable
             }
             else
             {
-                
-                gameObject.SetActive(false);
+                if (isAttacking == true)
+                {
+                    StartCoroutine(Attack());
+                }
             }
         }
         
@@ -63,17 +67,6 @@ public class EnemyOne : MonoBehaviour, IDamageable
         }
     }
     
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        var damageable = other.GetComponentInParent<IDamageable>();
-        if (damageable != null)
-        {
-            audioDeath.PlayOneShot(deathSound);
-            damageable.TakeDamage(damage);
-        }
-    }
-
     private IEnumerator Death()
     {
        col2D.enabled = false;
@@ -81,6 +74,23 @@ public class EnemyOne : MonoBehaviour, IDamageable
        audioDeath.PlayOneShot(deathSound);
         yield return new WaitForSeconds(deathSound.length);
         Destroy(gameObject);
+    }
+
+    private IEnumerator Attack()
+    {
+ 
+        isAttacking = false;
+
+        yield return new WaitForSeconds(2f);
+
+        attack.enabled = true;   
+        yield return new WaitForSeconds(0.5f);
+        attack.enabled = false;  
+
+        isAttacking = true;
+
+        
+        
     }
 }
 
