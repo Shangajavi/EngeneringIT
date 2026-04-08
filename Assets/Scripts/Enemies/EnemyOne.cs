@@ -12,17 +12,18 @@ public class EnemyOne : MonoBehaviour, IDamageable
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private Path currentPath;
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip hitSound;
     private Collider2D col2D;
     [SerializeField] private Collider2D attack;
     private SpriteRenderer sRenderer;
-    private AudioSource audioDeath;
+    private AudioSource audioSound;
     private int currentPoint;
     private bool isAttacking = true;
 
     private void Awake()
     {
         currentPath = GameObject.Find("Path").GetComponent<Path>();
-        audioDeath = GetComponent<AudioSource>();
+        audioSound = GetComponent<AudioSource>();
         col2D = GetComponent<Collider2D>();
         sRenderer = GetComponent<SpriteRenderer>();
     }
@@ -61,8 +62,7 @@ public class EnemyOne : MonoBehaviour, IDamageable
         
 
         if (health <= 0)
-        {
-            
+        { 
             StartCoroutine(Death());
         }
     }
@@ -71,18 +71,18 @@ public class EnemyOne : MonoBehaviour, IDamageable
     {
        col2D.enabled = false;
        sRenderer.enabled = false;
-       audioDeath.PlayOneShot(deathSound);
-        yield return new WaitForSeconds(deathSound.length);
-        Destroy(gameObject);
+       audioSound.PlayOneShot(deathSound);
+       yield return new WaitForSeconds(deathSound.length);
+       Destroy(gameObject);
     }
 
     private IEnumerator Attack()
     {
- 
+        
         isAttacking = false;
-
         yield return new WaitForSeconds(2f);
-
+        audioSound.PlayOneShot(hitSound);
+        
         attack.enabled = true;   
         yield return new WaitForSeconds(0.5f);
         attack.enabled = false;  

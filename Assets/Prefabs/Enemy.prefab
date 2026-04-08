@@ -305,11 +305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c6cac6480623846827fe89380a3321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyOne
-  health: 50
+  health: 20
   moveSpeed: 7
   targetPosition: {x: 0, y: 0, z: 0}
   currentPath: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 66a07294c3d87fd4b966bbb352ce7e9c, type: 3}
+  hitSound: {fileID: 8300000, guid: 0b285f9f2c983914d9a760f62af3ee87, type: 3}
   attack: {fileID: 6250017207390030381}
 --- !u!82 &2044242796940331693
 AudioSource:
