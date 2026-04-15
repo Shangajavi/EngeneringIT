@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3884142130360492010}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,7 +128,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 10
@@ -273,8 +273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21fa63c873bce140b09af30ed342841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
-  jumpForce: 20
+  jumpForce: 140
   checkGround: {fileID: 2608635731808247018}
+  animJump: {fileID: 7862226292675250295}
 --- !u!114 &3884142130360492010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,7 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276880815da282c4195268d7212cafdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  movementForce: 4
+  movementForce: 115
   animMove: {fileID: 7862226292675250295}
   camClose: {fileID: 0}
   camAway: {fileID: 0}
+  maxSpeed: 10

@@ -21,6 +21,7 @@ public class PlayerJump : MonoBehaviour
             Jump();
         }
         
+        
     }
     private void Jump()
     {

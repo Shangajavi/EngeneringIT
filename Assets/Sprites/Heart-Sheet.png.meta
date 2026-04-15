@@ -120,8 +120,8 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -142,16 +142,16 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a9146ffcd9f6e542a2c32b2675e8122
-      internalID: -1957730336
+      spriteID: 52cdd86eb37dd974cb38be269512a57c
+      internalID: -1333246961
       vertices: []
       indices: 
       edges: []
@@ -164,16 +164,16 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ea81ecb569253742939b0cad677f46d
-      internalID: 2031194452
+      spriteID: e4d937564ccef9a48b82a1f1996c3259
+      internalID: 194848019
       vertices: []
       indices: 
       edges: []
@@ -186,16 +186,16 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22108a21050cd804e801b9a95503eefc
-      internalID: 1413599785
+      spriteID: 000d66771b20ae746b4ef8e77e57752b
+      internalID: -1702263000
       vertices: []
       indices: 
       edges: []
@@ -204,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 03e57f4c85e2c764695a946d4b85495b
+    spriteID: c077cc63384be8e44ad849611ff993a4
     internalID: 0
     vertices: []
     indices: 
@@ -217,9 +217,9 @@ TextureImporter:
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Heart-Sheet_0: 7107508412977418053
-      Heart-Sheet_1: -1957730336
-      Heart-Sheet_2: 2031194452
-      Heart-Sheet_3: 1413599785
+      Heart-Sheet_1: -1333246961
+      Heart-Sheet_2: 194848019
+      Heart-Sheet_3: -1702263000
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

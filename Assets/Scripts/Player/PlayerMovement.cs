@@ -4,11 +4,11 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float movementForce;
     [SerializeField] private Animator animMove;
-
     
     [SerializeField] private GameObject camClose;
     [SerializeField] private GameObject camAway;
-    
+    [SerializeField] private float maxSpeed;
+    private Rigidbody2D rb;
     private SpriteRenderer sRenderer;
     private float jumpinput;
     private float hinput;
@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         Application.targetFrameRate = 60;
         sRenderer = GetComponent<SpriteRenderer>();
         camAway.SetActive(false);
@@ -27,8 +28,13 @@ public class PlayerMovement : MonoBehaviour
     {
        
         hinput = Input.GetAxisRaw("Horizontal");
-        movement.x = hinput * movementForce * Time.deltaTime;
-        transform.Translate(movement);
+        rb.AddForce(Vector2.right * (hinput * movementForce), ForceMode2D.Force);
+
+        if (Mathf.Abs(rb.linearVelocity.x) > maxSpeed)
+        {
+            rb.linearVelocity = new Vector2(Mathf.Sign(rb.linearVelocity.x) * maxSpeed, rb.linearVelocity.y);
+        }
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             CamSwitch();
