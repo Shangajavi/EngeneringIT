@@ -17,6 +17,19 @@ public class Tower : MonoBehaviour
     private Transform currentTarget;
 
 
+    private void Start()
+    {
+        if (Info.Instance != null)
+        {
+            gameObject.SetActive(Info.Instance.HasTower);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+
     void Update()
     {
         FindTarget();

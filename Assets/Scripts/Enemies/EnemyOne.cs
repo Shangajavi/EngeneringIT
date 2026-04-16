@@ -13,15 +13,19 @@ public class EnemyOne : MonoBehaviour, IDamageable
     [SerializeField] private Path currentPath;
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private AudioClip hitSound;
+    [SerializeField] private int prize = 10;
     private Collider2D col2D;
     [SerializeField] private Collider2D attack;
     private SpriteRenderer sRenderer;
     private AudioSource audioSound;
     private int currentPoint;
+    private  IPrizable prizable;
     private bool isAttacking = true;
 
     private void Awake()
     {
+        
+        prizable = FindFirstObjectByType<Info>(); 
         currentPath = GameObject.Find("Path").GetComponent<Path>();
         audioSound = GetComponent<AudioSource>();
         col2D = GetComponent<Collider2D>();
@@ -71,6 +75,12 @@ public class EnemyOne : MonoBehaviour, IDamageable
     {
        col2D.enabled = false;
        sRenderer.enabled = false;
+       
+       if (prizable != null)
+           prizable.GiveMoney(prize);
+       else
+           Debug.LogWarning("No se encontró ningún IPrizable (Info) en la escena.");
+
        audioSound.PlayOneShot(deathSound);
        yield return new WaitForSeconds(deathSound.length);
        Destroy(gameObject);
@@ -92,6 +102,8 @@ public class EnemyOne : MonoBehaviour, IDamageable
         
         
     }
+
+
 }
 
 

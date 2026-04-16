@@ -8,21 +8,13 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject Prefab;
     [SerializeField] private int  number;
     [SerializeField] private int maxSpawn;
-    private bool isSpawning = true;
+    [SerializeField]private bool isSpawning = true;
     
     private void Update()
     {
-        spawnerTimer -= Time.deltaTime;
-        if (spawnerTimer <= 0 && isSpawning == true)
-        {
-            spawnerTimer = spawnRate;
-            SpawnEnemy();
-        }
+        SpawnTime();
+        
 
-        if (number == maxSpawn)
-        {
-            isSpawning = false;
-        }
     }
 
     public void SpawnEnemy()
@@ -31,4 +23,26 @@ public class Spawner : MonoBehaviour
         spawnObject.transform.position = transform.position;
         number++;
     }
+    
+    private void SpawnTime()
+    {
+        if (isSpawning == false)
+        {
+            return;
+        }
+
+        spawnerTimer -= Time.deltaTime;
+
+        if (spawnerTimer <= 0f)
+        {
+            spawnerTimer = spawnRate;
+            SpawnEnemy();
+        }
+
+        if (number >= maxSpawn)
+        {
+            isSpawning = false;
+        }
+    }
+
 }

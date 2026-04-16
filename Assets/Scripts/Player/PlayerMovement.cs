@@ -17,12 +17,12 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        Application.targetFrameRate = 60;
         sRenderer = GetComponent<SpriteRenderer>();
         camAway.SetActive(false);
         camClose.SetActive(true);
         
     }
+    
 
     void Update()
     {

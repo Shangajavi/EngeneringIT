@@ -31,7 +31,7 @@ public class Dialogo : MonoBehaviour
 
     void Update()
     {
-        if (isInRange == true && Input.GetKeyDown(KeyCode.E))
+        if (isInRange == true && Input.GetKeyDown(KeyCode.Q))
         {
             if (!isTalking)
             { 
