@@ -21,10 +21,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadNewScene(Vector3 targetPosition, Vector3 targetOrientation, int targetSceneIndex)
+    public void LoadNextScene(Vector3 targetPosition, Vector3 targetOrientation, int sceneNumber)
     {
         SavedPosition = targetPosition;
         SavedOrientation = targetOrientation;
-        SceneManager.LoadScene(targetSceneIndex);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(sceneNumber);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        GameObject player = GameObject.FindWithTag("Player");
+
+        if (player != null)
+        {
+            player.transform.position = SavedPosition;
+            player.transform.eulerAngles = SavedOrientation;
+        }
     }
 }

@@ -13,7 +13,7 @@ public class Door : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             SceneManager.LoadScene(targetSceneIndex);
-            GameManager.instance.LoadNewScene(targetPosition, targetOrientation, targetSceneIndex);
+            GameManager.instance.LoadNextScene(targetPosition, targetOrientation, targetSceneIndex);
         }
     }
     

@@ -1,17 +1,20 @@
 using System;
+using Others;
 using UnityEngine;
 
 public class Info : MonoBehaviour, IPrizable
 {
+    public Round currentRound = Round.Round1;
     public static Info Instance { get; private set; }
     [SerializeField] private int currentMoney;
     [SerializeField] private bool hasTower;
     private GameObject tower;
+    public bool roundCompleted = false;
 
     private void Awake()
     {
         
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -20,11 +23,12 @@ public class Info : MonoBehaviour, IPrizable
         Instance = this;
         DontDestroyOnLoad(gameObject);
         tower = FindFirstObjectByType(typeof(Tower)) as GameObject;
+        
     }
     
     public bool HasTower => hasTower;
 
-    public void BuyTower(int cost)
+    public void BuildTower(int cost)
     {
         if (hasTower) return;
 
