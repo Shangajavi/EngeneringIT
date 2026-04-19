@@ -2,17 +2,17 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private float spawnRate = 1f;
-    [SerializeField] private GameObject Prefab;
+    [SerializeField] private GameObject prefab;
     [SerializeField] private int maxSpawn = 10;
 
     private float spawnerTimer;
     private int number;
+    [SerializeField]private int alive;
     private bool isSpawning;
-    private bool finishing; // evita disparar la corutina más de una vez
+    private bool finishing;
 
     public event Action OnFinished;
 
@@ -20,18 +20,22 @@ public class Spawner : MonoBehaviour
     {
         spawnerTimer = spawnRate;
         number = 0;
-        isSpawning = true;     // ✅ IMPORTANTE: debe ser TRUE
+        alive = 0;
+        isSpawning = false;
         finishing = false;
     }
 
     private void Update()
     {
+        StartSpawning();
         SpawnTime();
     }
+    
 
     private void SpawnTime()
     {
         if (!isSpawning) return;
+        if (number >= maxSpawn) return;
 
         spawnerTimer -= Time.deltaTime;
 
@@ -40,8 +44,35 @@ public class Spawner : MonoBehaviour
             spawnerTimer = spawnRate;
             SpawnEnemy();
         }
+    }
 
-        if (number >= maxSpawn && !finishing)
+    private void SpawnEnemy()
+    {
+        if (prefab == null) return;
+
+        GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity);
+        number++;
+        alive++;
+
+        EnemyOne enemy = obj.GetComponent<EnemyOne>();
+        if (enemy != null)
+        {
+            enemy.OnDeath += OnEnemyDeath;
+        }
+    }
+    
+    public void StartSpawning()
+    {
+        if (finishing) return;
+        isSpawning = true;
+    }
+
+
+    private void OnEnemyDeath()
+    {
+        alive--;
+
+        if (number >= maxSpawn && alive <= 0 && !finishing)
         {
             finishing = true;
             isSpawning = false;
@@ -49,18 +80,15 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy()
-    {
-        if (Prefab == null) return;
-
-        Instantiate(Prefab, transform.position, Quaternion.identity);
-        number++;
-    }
-
     private IEnumerator FinishAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         OnFinished?.Invoke();
     }
-}
+    
+    private void OnDisable()
+    {
+        OnFinished = null;
+    }
 
+}

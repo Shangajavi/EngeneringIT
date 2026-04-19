@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,49 +12,68 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxSpeed;
     private Rigidbody2D rb;
     private SpriteRenderer sRenderer;
-    private float jumpinput;
-    private float hinput;
-    private Vector2 movement;
+    private Vector2 movementInput; 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sRenderer = GetComponent<SpriteRenderer>();
-        camAway.SetActive(false);
-        camClose.SetActive(true);
+ 
+        if (camAway != null) camAway.SetActive(false);
+        if (camClose != null) camClose.SetActive(true);
+
         
     }
-    
+
+
+    private void OnEnable()
+    {
+        if (InputManager.Instance != null)
+            InputManager.Instance.OnCamInitiated += CamSwitch;
+    }
+
+
 
     void Update()
     {
-       
-        hinput = Input.GetAxisRaw("Horizontal");
-        rb.AddForce(Vector2.right * (hinput * movementForce), ForceMode2D.Force);
+         if (InputManager.Instance != null)
+         {
+             movementInput = InputManager.Instance.GetMovement();
+         }
+         else
+         {
+             movementInput = Vector2.zero;
+         }
+         MoveAnimations(movementInput.x);
+         
+
+        
+    }
+    
+    private void FixedUpdate()
+    {
+        float h = movementInput.x;
+
+        rb.AddForce(Vector2.right * (h * movementForce * 4), ForceMode2D.Force);
 
         if (Mathf.Abs(rb.linearVelocity.x) > maxSpeed)
         {
             rb.linearVelocity = new Vector2(Mathf.Sign(rb.linearVelocity.x) * maxSpeed, rb.linearVelocity.y);
         }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            CamSwitch();
-        }
-        MoveAnimations();
     }
 
-    private void MoveAnimations()
+
+    private void MoveAnimations(float h)
     {
         
-        if (hinput != 0 )
+        if (h != 0 )
         {
             animMove.SetBool("isMoving", true);
-            if (hinput > 0)
+            if (h > 0)
             {
                 sRenderer.flipX = false;
             }
-            else if (hinput < 0)
+            else if (h < 0)
             {
                sRenderer.flipX = true; 
             }
@@ -67,8 +88,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void CamSwitch()
     {
+        
+        if (camClose == null || camAway == null) return;
         camClose.SetActive(!camClose.activeSelf);
         camAway.SetActive(!camAway.activeSelf);
+
+    }
+    private void OnDestroy()
+    {
+        
+        if (InputManager.Instance != null)
+            InputManager.Instance.OnCamInitiated -= CamSwitch;
+
     }
 
 

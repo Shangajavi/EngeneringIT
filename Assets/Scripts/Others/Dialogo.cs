@@ -27,28 +27,11 @@ public class Dialogo : MonoBehaviour
         panelDialogo.SetActive(false);
     }
 
-
-
-    void Update()
+    private void Start()
     {
-        if (isInRange == true && Input.GetKeyDown(KeyCode.Q))
-        {
-            if (!isTalking)
-            { 
-                EmpezarDialogo();
-            }
-            else if (dialogoText.text == lineas[lineasIndex])
-            {
-                SiguinteLinea();
-            }
-            else
-            {
-                StopAllCoroutines();
-                dialogoText.text = lineas[lineasIndex];
-            }
-            
-        }
+        InputManager.Instance.OnInteractionCanceled += DialogoText;
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -67,22 +50,22 @@ public class Dialogo : MonoBehaviour
             exlamationMark.SetActive(false);
         }
     }
-    private void EmpezarDialogo()
+    private void StartDialogue()
     {
         isTalking = true;
         panelDialogo.SetActive(true);
         exlamationMark.SetActive(false);
         lineasIndex = 0;
         Time.timeScale = 0;
-        StartCoroutine(MostrarLineas());
+        StartCoroutine(Showlines());
     }
 
-    private void SiguinteLinea()
+    private void Nextline()
     {
         lineasIndex++;
         if (lineasIndex < lineas.Length)
         {
-            StartCoroutine(MostrarLineas());
+            StartCoroutine(Showlines());
         }
         else
         {
@@ -92,7 +75,7 @@ public class Dialogo : MonoBehaviour
             Time.timeScale = 1;
         }
     }
-    private IEnumerator MostrarLineas()
+    private IEnumerator Showlines()
     {
         dialogoText.text = string.Empty;
         foreach (char ch in lineas[lineasIndex])
@@ -108,5 +91,30 @@ public class Dialogo : MonoBehaviour
             yield return new WaitForSecondsRealtime(tiempoTexto);
 
         }
+    }
+
+    private void DialogoText()
+    {
+        if (isInRange == true)
+        {
+            if (!isTalking)
+            { 
+                StartDialogue();
+            }
+            else if (dialogoText.text == lineas[lineasIndex])
+            {
+                Nextline();
+            }
+            else
+            {
+                StopAllCoroutines();
+                dialogoText.text = lineas[lineasIndex];
+            }
+            
+        }
+    }
+    private void OnDestroy()
+    {
+        InputManager.Instance.OnInteractionCanceled -= DialogoText;
     }
 }

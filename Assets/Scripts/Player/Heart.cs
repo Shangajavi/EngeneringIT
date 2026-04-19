@@ -1,8 +1,17 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Heart : MonoBehaviour, IDamageable
 {
-    [SerializeField] private int health;
+    [SerializeField] public float health;
+    [SerializeField] public GameObject loseWidget;
+
+    private void Awake()
+    {
+        loseWidget.SetActive(false);
+    }
     public void TakeDamage(int amount)
     {
         health -= amount;
@@ -10,9 +19,17 @@ public class Heart : MonoBehaviour, IDamageable
 
         if (health <= 0)
         {
-            
-            Destroy(gameObject);
+            StartCoroutine(HandleLost());
+
         }
+    }
+    private IEnumerator HandleLost()
+    {
+        if (loseWidget != null)
+            loseWidget.SetActive(true);
+
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(0);
     }
 
 }

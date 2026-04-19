@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 6344859881605867870}
   - component: {fileID: 4599928592600287702}
   - component: {fileID: 3884142130360492010}
+  - component: {fileID: 1414587682425530838}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -293,3 +294,33 @@ MonoBehaviour:
   camClose: {fileID: 0}
   camAway: {fileID: 0}
   maxSpeed: 10
+--- !u!114 &1414587682425530838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333246342858278346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: a6e2f3bf254203b47b39530bd121d714, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

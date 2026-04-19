@@ -1,6 +1,8 @@
 
+using System.Collections;
 using Others;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoundManager : MonoBehaviour
 {
@@ -13,6 +15,11 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private Transform gate;
     [SerializeField] private Vector2 gateClosedPos;
     [SerializeField] private Vector2 gateOpenPos;
+    
+    
+    [Header("Victory")]
+    [SerializeField] private GameObject victoryWidget;
+
 
     private Info info;
     private Spawner activeSpawner;
@@ -20,9 +27,6 @@ public class RoundManager : MonoBehaviour
     private void Start()
     {
         info = Info.Instance;
-
-        // Si la ronda NO está completada, activamos su spawner.
-        // Si está completada, solo abrimos la gate y esperamos confirmación.
         SetupSceneState();
     }
 
@@ -32,13 +36,11 @@ public class RoundManager : MonoBehaviour
 
         if (info.roundCompleted)
         {
-            // Ronda ya terminada -> puerta abierta y NO spawnear
             DeactivateAllSpawners();
             OpenGate();
         }
         else
         {
-            // Ronda en curso -> puerta cerrada y spawner activo
             CloseGate();
             ActivateSpawnerForRound(info.currentRound);
         }
@@ -69,34 +71,36 @@ public class RoundManager : MonoBehaviour
 
     private void HandleSpawnerFinished()
     {
-        // ✅ Aquí NO avanzamos ronda: solo abrimos la gate y marcamos completada
         if (info != null)
             info.roundCompleted = true;
 
         OpenGate();
         DeactivateAllSpawners();
+        
+        if (info.currentRound == Round.Round3)
+        {
+            StartCoroutine(HandleVictory());
+        }
+
     }
 
     public void ConfirmAndStartNextRound()
     {
         if (info == null) return;
 
-        // Solo si la ronda estaba completada
+        
         if (!info.roundCompleted) return;
 
-        // Avanzar ronda
+        
         switch (info.currentRound)
         {
             case Round.Round1: info.currentRound = Round.Round2; break;
             case Round.Round2: info.currentRound = Round.Round3; break;
             case Round.Round3:
-                // Fin del juego: aquí podrías hacer victoria
                 return;
         }
 
         info.roundCompleted = false;
-
-        // Iniciar nueva ronda en esta escena
         CloseGate();
         ActivateSpawnerForRound(info.currentRound);
     }
@@ -111,6 +115,16 @@ public class RoundManager : MonoBehaviour
     private void CloseGate()
     {
         if (gate != null) gate.position = gateClosedPos;
+    }
+
+    
+    private IEnumerator HandleVictory()
+    {
+        if (victoryWidget != null)
+            victoryWidget.SetActive(true);
+
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(0);
     }
 
     private void OpenGate()

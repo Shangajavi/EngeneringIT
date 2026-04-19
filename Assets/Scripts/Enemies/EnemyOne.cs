@@ -21,6 +21,7 @@ public class EnemyOne : MonoBehaviour, IDamageable
     private int currentPoint;
     private  IPrizable prizable;
     private bool isAttacking = true;
+    public event Action OnDeath;
 
     private void Awake()
     {
@@ -77,12 +78,17 @@ public class EnemyOne : MonoBehaviour, IDamageable
        sRenderer.enabled = false;
        
        if (prizable != null)
+       {
            prizable.GiveMoney(prize);
+       }       
        else
+       {
            Debug.LogWarning("No se encontró ningún IPrizable (Info) en la escena.");
+       }
 
        audioSound.PlayOneShot(deathSound);
        yield return new WaitForSeconds(deathSound.length);
+       OnDeath?.Invoke();
        Destroy(gameObject);
     }
 

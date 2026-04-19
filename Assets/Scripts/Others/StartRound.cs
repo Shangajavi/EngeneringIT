@@ -14,6 +14,11 @@ namespace Others
             marca.SetActive(false);
         }
 
+        private void Start()
+        {
+            InputManager.Instance.OnInteractionInitiated += StartRounds;
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
@@ -39,11 +44,18 @@ namespace Others
             {
                 return;
             }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                roundManager.ConfirmAndStartNextRound();
-            }
+            
         }
+        private void StartRounds()
+        {
+            roundManager.ConfirmAndStartNextRound();
+        }
+        private void OnDestroy()
+        {
+            InputManager.Instance.OnInteractionCanceled -= StartRounds;
+        }
+
     }
+
+
 }

@@ -13,22 +13,29 @@ public class PlayerJump : MonoBehaviour
        rb = GetComponent<Rigidbody2D>(); 
     }
 
+    private void Start()
+    {
+        InputManager.Instance.OnJumpInitiated += Jump;
+    }
+
     void Update()
     {
         Debug.DrawRay(checkGround.transform.position, Vector2.down * 1.5f, Color.red);
-        if(Input.GetButtonDown("Jump") && GetIsGrounded())
-        {
-            Jump();
-        }
-        
-        
     }
     private void Jump()
     {
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if(GetIsGrounded())
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
     private bool GetIsGrounded()
     {
         return Physics2D.Raycast(checkGround.transform.position, Vector2.down, 1.5f, LayerMask.GetMask("Ground"));
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.Instance.OnJumpInitiated -= Jump;
     }
 }
